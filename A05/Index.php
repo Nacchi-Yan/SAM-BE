@@ -24,6 +24,11 @@ body, html {height: 100%}
   width: 120px;
   text-align:center;
 }
+
+.imgDb{
+  width: 100%;
+}
+
 </style>
 </head>
 <body>
@@ -43,23 +48,27 @@ body, html {height: 100%}
   <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-black w3-display-container">
       <span onclick="document.getElementById('gaming').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-      <h1>Starters</h1>
+      <h1>Game</h1>
     </div>
-    <div class="w3-container">
-      <?php
+    <?php
         $getQuery = "SELECT * FROM islandcontents WHERE islandOfPersonalityID = 1";
         $gamingContent = executeQuery($getQuery);
 
         while ($row = mysqli_fetch_array($gamingContent)) {
-      ?>
+    ?>
+    <div class="w3-container" style="padding:0px;">
+      <img src="<?php echo $row ["image"]; ?>" class="imgDb " >
+    </div>
+    <div class="w3-container w3-black w3-display-container">
+      
       <h5><b>
         <?php
           echo $row['content'];
         ?>
       </h5></b>
-      <?php
-        }
-      ?>
+    <?php
+      }
+    ?>
       
     </div>
   </div>
@@ -70,23 +79,27 @@ body, html {height: 100%}
   <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-black w3-display-container">
       <span onclick="document.getElementById('music').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-      <h1>Starters</h1>
+      <h1>Music</h1>
     </div>
-    <div class="w3-container">
-      <?php
+    <?php
         $getQuery = "SELECT * FROM islandcontents WHERE islandOfPersonalityID = 2";
         $musicContent = executeQuery($getQuery);
 
         while ($row = mysqli_fetch_array($musicContent)) {
-      ?>
+    ?>
+    <div class="w3-container" style="padding:0px;">
+      <img src="<?php echo $row ["image"]; ?>" class="imgDb " >
+    </div>
+    <div class="w3-container w3-black w3-display-container">
+      
       <h5><b>
         <?php
           echo $row['content'];
         ?>
       </h5></b>
-      <?php
-        }
-      ?>
+    <?php
+      }
+    ?>
       
     </div>
   </div>
@@ -94,59 +107,9 @@ body, html {height: 100%}
 
 <!-- Sibling -->
 
-<div id="sibling" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-black w3-display-container">
-      <span onclick="document.getElementById('sibling').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-      <h1>Starters</h1>
-    </div>
-    <div class="w3-container">
-      <?php
-        $getQuery = "SELECT * FROM islandcontents WHERE islandOfPersonalityID = 3";
-        $siblingContent = executeQuery($getQuery);
-
-        while ($row = mysqli_fetch_array($siblingContent)) {
-      ?>
-      <h5><b>
-        <?php
-          echo $row['content'];
-        ?>
-      </h5></b>
-      <?php
-        }
-      ?>
-      
-    </div>
-  </div>
-</div>
 
 <!-- Musical Modal -->
 
-<div id="musical" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-black w3-display-container">
-      <span onclick="document.getElementById('musical').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-      <h1>Starters</h1>
-    </div>
-    <div class="w3-container">
-      <?php
-        $getQuery = "SELECT * FROM islandcontents WHERE islandOfPersonalityID = 4";
-        $musicalContent = executeQuery($getQuery);
-
-        while ($row = mysqli_fetch_array($musicalContent)) {
-      ?>
-      <h5><b>
-        <?php
-          echo $row['content'];
-        ?>
-      </h5></b>
-      <?php
-        }
-      ?>
-      
-    </div>
-  </div>
-</div>
 </body>
 </html>
 

@@ -19,6 +19,11 @@ body, html {height: 100%}
   background-position: center;
   background-size: cover;
 }
+
+.w3-button{
+  width: 120px;
+  text-align:center;
+}
 </style>
 </head>
 <body>

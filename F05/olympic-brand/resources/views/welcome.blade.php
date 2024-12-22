@@ -14,7 +14,7 @@
         <div class="row">
             @foreach($products as $prod)
             <div class="col">
-                <div class="card">
+                <div class="card text-center" >
                     @php
                         $stock = $prod->stock;
                     @endphp
@@ -25,7 +25,7 @@
                             <h5 class="card-title">{{ $prod->name }}</h5>
                             <p class="card-text">{{ $prod->description }}</p>
                             <p class ="card-text">{{ $prod->price }}</p>
-                            <input type="text" name="quantity"><br><br>
+                            <input type="number" name="quantity" placeholder="0"><br><br>
                             <a href="#" class="btn btn-primary">Add Item</a>
                         </div>
                     @else

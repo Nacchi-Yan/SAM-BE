@@ -10,7 +10,21 @@
   <body>
     <h1>Products</h1>
 
-
+    <div class = "row">
+        @foreach($products as $prod)
+        <div class="col">
+            <div class="card" >
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ $prod->name }}</h5>
+                  <p class="card-text">{{ $prod->description }}</p>
+                  <p class ="card-text">{{ $prod->price }}</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

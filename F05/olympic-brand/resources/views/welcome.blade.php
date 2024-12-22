@@ -14,13 +14,23 @@
         @foreach($products as $prod)
         <div class="col">
             <div class="card" >
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">{{ $prod->name }}</h5>
-                  <p class="card-text">{{ $prod->description }}</p>
-                  <p class ="card-text">{{ $prod->price }}</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+                @php
+                    $stock = $prod->stock;
+                @endphp
+
+                @if ($stock>0)
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ $prod->name }}</h5>
+                    <p class="card-text">{{ $prod->description }}</p>
+                    <p class ="card-text">{{ $prod->price }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                @else
+                    <div class="card" style="display: none;">
+
+                    </div>
+                @endif
             </div>
         </div>
         @endforeach

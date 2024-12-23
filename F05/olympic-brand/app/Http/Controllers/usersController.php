@@ -46,7 +46,7 @@ class usersController extends Controller
                 if ($user->isAdmin == "user") {
 
                     $request->session()->regenerate();
-                    $request->session()->put('role', $user->role);
+                    $request->session()->put('id', $user->id);
 
                     toast('Login Successful','success');
                     return redirect()->route('Index');

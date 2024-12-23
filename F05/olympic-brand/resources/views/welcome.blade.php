@@ -9,71 +9,80 @@
   </head>
   <body>
     <h1>Products</h1>
+     <!-- Check if user is logged in -->
+     @if(session('id'))
+        <div class="container">
+            <div class="row">
+                @foreach($products as $prod)
+                @php
+                    $stock = $prod->stock;
+                @endphp
+                <div class="col">
+                    @if ($stock > 0)
+                        <div class="card text-center">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $prod->name }}</h5>
+                                <p class="card-text">{{ $prod->description }}</p>
+                                <p class="card-text">{{ $prod->price }}</p>
+                                {{-- quantity couter --}}
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- Add Item Button -->
+                                        <button
+                                        class="btn btn-primary add-item"
+                                        id="add-item-{{ $prod->productID }}"
+                                        onclick="incrementQuantity({{ $prod->productID }}, {{ $stock }})"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <!-- Input for quantity -->
+                                        <input
+                                        type="number"
+                                        name="quantity"
+                                        placeholder="0"
+                                        value="0"
+                                        min="0"
+                                        max="{{ $stock }}"
+                                        id="quantity-{{ $prod->productID }}"
+                                        class="quantity-input text-center">
+                                        <br><br>
 
-    <div class="container">
-        <div class="row">
-            @foreach($products as $prod)
-            @php
-                $stock = $prod->stock;
-            @endphp
-            <div class="col">
-                @if ($stock > 0)
-                    <div class="card text-center">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $prod->name }}</h5>
-                            <p class="card-text">{{ $prod->description }}</p>
-                            <p class="card-text">{{ $prod->price }}</p>
-                            {{-- quantity couter --}}
-                            <div class="row">
-                                <div class="col">
-                                     <!-- Add Item Button -->
-                                    <button
-                                    class="btn btn-primary add-item"
-                                    id="add-item-{{ $prod->productID }}"
-                                    onclick="incrementQuantity({{ $prod->productID }}, {{ $stock }})"
-                                    >
-                                        +
-                                    </button>
+                                    </div>
+                                    <div class="col">
+                                        <!-- Minus Button -->
+                                        <button
+                                        class="btn btn-secondary minus-item"
+                                        id="minus-item-{{ $prod->productID }}"
+                                        onclick="decrementQuantity({{ $prod->productID }})"
+                                        {{ $stock == 0 ? 'disabled' : '' }}
+                                        >
+                                            -
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <!-- Input for quantity -->
-                                    <input
-                                    type="number"
-                                    name="quantity"
-                                    placeholder="0"
-                                    value="0"
-                                    min="0"
-                                    max="{{ $stock }}"
-                                    id="quantity-{{ $prod->productID }}"
-                                    class="quantity-input text-center">
-                                    <br><br>
 
-                                </div>
-                                <div class="col">
-                                    <!-- Minus Button -->
-                                    <button
-                                    class="btn btn-secondary minus-item"
-                                    id="minus-item-{{ $prod->productID }}"
-                                    onclick="decrementQuantity({{ $prod->productID }})"
-                                    {{ $stock == 0 ? 'disabled' : '' }}
-                                    >
-                                        -
-                                    </button>
-                                </div>
+                                <button class="btn btn-primary submit">
+                                    Add Item
+                                </button>
                             </div>
-
-                            <button class="btn btn-primary submit">
-                                Add Item
-                            </button>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
-    </div>
+     @else
+     <!-- Redirect back to login if no user session -->
+     <script>window.location = "login";</script>
+     @endif
 
+
+
+
+    @include('sweetalert::alert')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

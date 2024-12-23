@@ -22,7 +22,8 @@
                         <p><b>price:</b>  {{ $order-> Total }} </p>
                     </div>
                 @endforeach
-                <h1 class="text-center"> Total </h1>
+
+                <p><strong>Grand Total: {{ $grandTotal }}</strong></p>
                 <button type="submit"> Submit Order </button>
             </form>
         </div>

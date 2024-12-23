@@ -16,23 +16,26 @@ class ordersModel extends Model
     public $timestamps = false;
 
     public static function showOrders($controlNumber){
-        // $sql = DB::select("SELECT *
-        // FROM orders
-        // INNER JOIN products USING (productID)
-        // WHERE controlNumber = ?", [$controlNumber]);
 
         $sql = DB::select("SELECT o.controlNumber, p.name, p.img, SUM(o.quantity) AS Quantity, SUM(p.price * o.quantity) AS Total
         FROM `orders` AS o INNER JOIN products AS p ON p.productID = o.productID
         WHERE o.controlNumber = ? GROUP BY o.controlNumber, o.productID, p.name, p.img;" , [$controlNumber]);
 
-        return $sql;
+$grandTotal = 0;
+foreach ($sql as $order) {
+    $grandTotal += $order->Total;
+}
+
+// Return both orders and grand total
+return [
+    'orders' => $sql,
+    'grandTotal' => $grandTotal
+];
+
+
     }
 
     public static function showReceipts($controlNumber){
-        $sql = DB::select("SELECT *
-        FROM orders
-        INNER JOIN products USING (productID)
-        WHERE controlNumber = ?", [$controlNumber]);
 
         $sql = DB::select("SELECT DISTINCT controlNumber
         FROM orders

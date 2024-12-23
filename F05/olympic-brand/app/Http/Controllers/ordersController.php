@@ -29,7 +29,12 @@ class ordersController extends Controller
         $controlNumber = session('controlNumber');
         $orders = ordersModel::showOrders($controlNumber);
 
-        return view('orders',  ['orders' => $orders]);
+         // Pass the orders and grand total to the view
+        return view('orders',  [
+            'orders' => $orders['orders'],
+            'grandTotal' => $orders['grandTotal']
+        ]);
+
     }
 
     public function viewReceipt(Request $request){

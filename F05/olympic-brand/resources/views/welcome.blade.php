@@ -34,8 +34,6 @@
                 session(['controlNumber' => $controlNumber]);
             }
         }
-
-
         @endphp
 
         @if (session('currentControlNumber'))
@@ -44,63 +42,48 @@
         <div class="container">
             <div class="row">
                 @foreach($products as $prod)
-                @php
-                    $stock = $prod->stock;
-                @endphp
-                <div class="col">
-                    @if ($stock > 0)
-                        <div class="card text-center">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $prod->name }}</h5>
-                                <p class="card-text">{{ $prod->description }}</p>
-                                <p class="card-text">{{ $prod->price }}</p>
-                                {{-- quantity couter --}}
-                                <div class="row">
-                                    <div class="col">
-                                        <!-- Add Item Button -->
-                                        <button
-                                        class="btn btn-primary add-item"
-                                        id="add-item-{{ $prod->productID }}"
-                                        onclick="incrementQuantity({{ $prod->productID }}, {{ $stock }})"
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                    <div class="col">
-                                        <!-- Input for quantity -->
-                                        <input
-                                        type="number"
-                                        name="quantity"
-                                        placeholder="0"
-                                        value="0"
-                                        min="0"
-                                        max="{{ $stock }}"
-                                        id="quantity-{{ $prod->productID }}"
-                                        class="quantity-input text-center">
-                                        <br><br>
+                    <form action="{{ route('Add') }}" method="POST" class="form">
+                        @csrf
+                        @php
+                            $stock = $prod->stock;
+                        @endphp
+                        <div class="col">
+                            @if ($stock > 0)
+                                <div class="card text-center">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $prod->name }}</h5>
+                                        <p class="card-text">{{ $prod->description }}</p>
+                                        <p class="card-text">{{ $prod->price }}</p>
+                                        <div class="row">
 
-                                    </div>
-                                    <div class="col">
-                                        <!-- Minus Button -->
-                                        <button
-                                        class="btn btn-secondary minus-item"
-                                        id="minus-item-{{ $prod->productID }}"
-                                        onclick="decrementQuantity({{ $prod->productID }})"
-                                        {{ $stock == 0 ? 'disabled' : '' }}
-                                        >
-                                            -
+                                            <div class="col">
+                                                <!-- Input for quantity -->
+                                                <input
+                                                type="number"
+                                                name="quantity"
+                                                placeholder="0"
+                                                value="0"
+                                                min="0"
+                                                max="{{ $stock }}"
+                                                id="quantity-{{ $prod->productID }}"
+                                                class="quantity-input text-center">
+                                                <br><br>
+
+                                            </div>
+
+                                        </div>
+                                            <input type="text" name="productID" value={{ $prod->productID }} placeholder={{ $prod->productID }}>
+                                            <input type="text" name="controlNumber" value={{ $controlNumber}}>
+                                            <input type="text" name="status" value="pending">
+                                        <button class="btn btn-primary submit" type="submit">
+                                            Add Item
                                         </button>
                                     </div>
                                 </div>
-
-                                <button class="btn btn-primary submit">
-                                    Add Item
-                                </button>
-                            </div>
+                            @endif
                         </div>
-                    @endif
-                </div>
+                    </form>
                 @endforeach
             </div>
         </div>
@@ -116,42 +99,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
-  <script>
-    function incrementQuantity(productID, stock) {
-        const quantityInput = document.getElementById(`quantity-${productID}`);
-        const addItemButton = document.getElementById(`add-item-${productID}`);
-        const minusItemButton = document.getElementById(`minus-item-${productID}`);
 
-        let quantity = parseInt(quantityInput.value) || 0;
-        if (quantity < stock) {
-            quantity++;
-            quantityInput.value = quantity;
-        }
-
-        // Disable the Add button if quantity equals stock
-        addItemButton.disabled = quantity >= stock;
-
-        // Enable Minus button if quantity is greater than 0
-        minusItemButton.disabled = quantity <= 0;
-    }
-
-    function decrementQuantity(productID) {
-        const quantityInput = document.getElementById(`quantity-${productID}`);
-        const addItemButton = document.getElementById(`add-item-${productID}`);
-        const minusItemButton = document.getElementById(`minus-item-${productID}`);
-
-        let quantity = parseInt(quantityInput.value) || 0;
-        if (quantity > 0) {
-            quantity--;
-            quantityInput.value = quantity;
-        }
-
-        // Enable the Add button if quantity is less than stock
-        addItemButton.disabled = quantity >= parseInt(quantityInput.max);
-
-        // Disable Minus button if quantity equals 0
-        minusItemButton.disabled = quantity <= 0;
-    }
-</script>
 
 </html>

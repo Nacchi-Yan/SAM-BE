@@ -4,29 +4,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Orders</title>
+    <title>Receipt</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Orders</h1>
+    <h1>Receipt</h1>
     <!-- Check if user is logged in -->
     @if(session('id'))
         <div class="container">
-            <form action="{{ route('receipts') }}" method="POST" class="form">
-            @csrf
-                @foreach($orders as $order)
-                    <div class="card text-center">
-                        <p><b>product:</b> {{ $order-> name }}</p>
-                        <p><b>price:</b>  {{ $order-> price }}</p>
-                        <p><b>quantity:</b>  {{ $order-> quantity}}</p>
-                        <p><b>control Number:  {{ $order-> controlNumber }} </p>
-                    </div>
-                @endforeach
-                <h1 class="text-center"> Total </h1>
-                <button type="submit"> Submit Order </button>
-            </form>
+            @foreach($receipt as $order)
+                <div class="card text-center">
+                    <h1>THANK YOU FOR ORDERING</h1>
+                    <p><b>control Number:</b>  {{ $order-> controlNumber }} </p>
+                </div>
+            @endforeach
         </div>
-
+        <h1 class="text-center"> Total </h1>
+        <button> Submit Order </button>
     @else
     <!-- Redirect back to login if no user session -->
     <script>window.location = "login";</script>

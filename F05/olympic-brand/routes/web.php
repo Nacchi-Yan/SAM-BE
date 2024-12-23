@@ -11,4 +11,4 @@ Route::get('Index', [productsController::class, 'viewProducts'])->name('Index');
 Route::view('login', 'login')->name('login');
 Route::view('signup', 'register')->name('signup');
 Route::post('signup', [usersController::class, 'register'])->name('signup');
-
+Route::post('login', [usersController::class, 'login'])->name('login');

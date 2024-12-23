@@ -10,8 +10,8 @@ class usersModel extends Model
 {
     use HasFactory;
     protected $table = 'users';
-    protected $primaryKey = 'userID';
-    protected $fillable = ['username','email', 'password'];
+    protected $primaryKey = 'id';
+    protected $fillable = ['name','email', 'password', 'isAdmin'];
     public $timestamps = false;
 
 }

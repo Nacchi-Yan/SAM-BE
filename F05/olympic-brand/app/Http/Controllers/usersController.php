@@ -13,16 +13,17 @@ class usersController extends Controller
     {
         // Validate the request data as needed...
         $user = new usersModel();
-        $user->username = $req->input('username');
+        $user->name = $req->input('name');
         $user->email = $req->input('email');
         $user->password = bcrypt($req->input('password'));
+        $user->isAdmin = ($req->input('isAdmin'));
 
 
         $user->save();
 
 
         toast('Registration Successful','success');
-        // return redirect()->route('login');
+        return redirect()->route('signup');
     }
     // public function login(Request $request)
     // {

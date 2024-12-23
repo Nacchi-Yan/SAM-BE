@@ -74,11 +74,11 @@ class usersController extends Controller
         }
     }
 
-    // public function logout(Request $request)
-    // {
-    //     //use get for logout not post
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-    //     return redirect()->route('login');
-    // }
+    public function logout(Request $request)
+    {
+        //use get for logout not post
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
+    }
 }

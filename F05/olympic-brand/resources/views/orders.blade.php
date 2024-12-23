@@ -17,9 +17,9 @@
                 @foreach($orders as $order)
                     <div class="card text-center">
                         <p><b>product:</b> {{ $order-> name }}</p>
-                        <p><b>price:</b>  {{ $order-> price }}</p>
-                        <p><b>quantity:</b>  {{ $order-> quantity}}</p>
-                        <p><b>control Number:  {{ $order-> controlNumber }} </p>
+                        <p><b>control Number:</b>  {{ $order-> controlNumber }} </p>
+                        <p><b>quantity:</b>  {{ $order-> Quantity }} </p>
+                        <p><b>price:</b>  {{ $order-> Total }} </p>
                     </div>
                 @endforeach
                 <h1 class="text-center"> Total </h1>

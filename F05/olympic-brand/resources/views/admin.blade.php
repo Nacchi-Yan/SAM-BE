@@ -21,8 +21,9 @@
                 <table class="table table-responsive">
                     <thead>
                         <tr>
-                            <th>flavour</th>
-                            <th>stock_no</th>
+                            <th>Item</th>
+                            <th>stock no</th>
+                            <th>description</th>
                             <th>price</th>
                             <th>action</action>
 
@@ -34,9 +35,10 @@
                     <tr>
                         <td>{{ $products->name}}</td>
                         <td>{{ $products->stock}}</td>
+                        <td>{{ $products->description}}</td>
                         <td>{{ $products->price}}</td>
                         <td>
-                            {{-- <a href="{{ route('edit.cone', ['id' => $products->id]) }}"  class='btn btn-sm mx-1 mb-1'>Edit</a> --}}
+                            <a href="{{ route('edit.products', ['productID' => $products->productID]) }}"  class='btn btn-sm mx-1 mb-1'>Edit</a>
                             <a href="{{ route('delete.products', ['productID' => $products->productID]) }}"  class='btn btn-sm mx-1 mb-1'
                                 onclick = "confirmation(event)">
                                 Delete

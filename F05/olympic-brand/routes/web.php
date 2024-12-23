@@ -24,4 +24,6 @@ Route::post('receipts', [ordersController::class, 'viewReceipt'])->name('receipt
 // admin
 Route::view('admin', 'admin')->name('admin');
 Route::get('admin', [productsController::class, 'view'])->name('admin');
-Route::get('/delete/prod/{productID}', [productsController::class, 'delete'])->name('delete.products');
+Route::get('/delete/product/{productID}', [productsController::class, 'delete'])->name('delete.products');
+Route::get('/edit/product/{productID}', [productsController::class, 'edit'])->name('edit.products');
+Route::put('/update/product/{productID}', [productsController::class, 'update'])->name('update.products');

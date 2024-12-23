@@ -15,12 +15,11 @@ class ordersModel extends Model
     protected $fillable = ['controlNumber', 'productID', 'quantity', 'status'];
     public $timestamps = false;
 
-    public static function showOrders(){
+    public static function showOrders($controlNumber){
         $sql = DB::select("SELECT *
         FROM orders
         INNER JOIN products USING (productID)
-        WHERE status = 'pending';
-        ");
+        WHERE controlNumber = ?", [$controlNumber]);
 
         return $sql;
     }

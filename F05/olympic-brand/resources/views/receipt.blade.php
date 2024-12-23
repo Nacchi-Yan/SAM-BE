@@ -20,7 +20,7 @@
             @endforeach
         </div>
         <h1 class="text-center"> Total </h1>
-        <button> Submit Order </button>
+        {{-- <button> Submit Order </button> --}}
     @else
     <!-- Redirect back to login if no user session -->
     <script>window.location = "login";</script>

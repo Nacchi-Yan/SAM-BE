@@ -33,11 +33,15 @@ class ordersController extends Controller
     }
 
     public function viewReceipt(Request $request){
-        $receipt = ordersModel::showOrders($request);
+        $controlNumber = session('controlNumber');
+        $receipt = ordersModel::showOrders($controlNumber);
         Session::forget('controlNumber');
-
         return view('receipt', ['receipt' => $receipt]);
     }
+
+
+
+
 
 
 

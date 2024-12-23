@@ -23,4 +23,21 @@ class ordersModel extends Model
 
         return $sql;
     }
+
+    public static function showReceipts($controlNumber){
+        $sql = DB::select("SELECT *
+        FROM orders
+        INNER JOIN products USING (productID)
+        WHERE controlNumber = ?", [$controlNumber]);
+
+        $sql = DB::select("SELECT DISTINCT controlNumber
+        FROM orders
+        INNER JOIN products USING (productID)
+        WHERE controlNumber = ?", [$controlNumber]);
+
+
+
+
+        return $sql;
+    }
 }

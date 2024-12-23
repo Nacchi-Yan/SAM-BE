@@ -24,36 +24,47 @@
                             <h5 class="card-title">{{ $prod->name }}</h5>
                             <p class="card-text">{{ $prod->description }}</p>
                             <p class="card-text">{{ $prod->price }}</p>
+                            {{-- quantity couter --}}
+                            <div class="row">
+                                <div class="col">
+                                     <!-- Add Item Button -->
+                                    <button
+                                    class="btn btn-primary add-item"
+                                    id="add-item-{{ $prod->productID }}"
+                                    onclick="incrementQuantity({{ $prod->productID }}, {{ $stock }})"
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <!-- Input for quantity -->
+                                    <input
+                                    type="number"
+                                    name="quantity"
+                                    placeholder="0"
+                                    value="0"
+                                    min="0"
+                                    max="{{ $stock }}"
+                                    id="quantity-{{ $prod->productID }}"
+                                    class="quantity-input text-center">
+                                    <br><br>
 
-                            <!-- Input for quantity -->
-                            <input
-                                type="number"
-                                name="quantity"
-                                placeholder="0"
-                                value="0"
-                                min="0"
-                                max="{{ $stock }}"
-                                id="quantity-{{ $prod->productID }}"
-                                class="quantity-input"
-                            ><br><br>
+                                </div>
+                                <div class="col">
+                                    <!-- Minus Button -->
+                                    <button
+                                    class="btn btn-secondary minus-item"
+                                    id="minus-item-{{ $prod->productID }}"
+                                    onclick="decrementQuantity({{ $prod->productID }})"
+                                    {{ $stock == 0 ? 'disabled' : '' }}
+                                    >
+                                        -
+                                    </button>
+                                </div>
+                            </div>
 
-                            <!-- Add Item Button -->
-                            <button
-                                class="btn btn-primary add-item"
-                                id="add-item-{{ $prod->productID }}"
-                                onclick="incrementQuantity({{ $prod->productID }}, {{ $stock }})"
-                            >
+                            <button class="btn btn-primary submit">
                                 Add Item
-                            </button>
-
-                            <!-- Minus Button -->
-                            <button
-                                class="btn btn-secondary minus-item"
-                                id="minus-item-{{ $prod->productID }}"
-                                onclick="decrementQuantity({{ $prod->productID }})"
-                                {{ $stock == 0 ? 'disabled' : '' }}
-                            >
-                                Minus
                             </button>
                         </div>
                     </div>
@@ -102,6 +113,6 @@
         // Disable Minus button if quantity equals 0
         minusItemButton.disabled = quantity <= 0;
     }
-    </script>
+</script>
 
 </html>

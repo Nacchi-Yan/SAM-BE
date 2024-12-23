@@ -27,3 +27,5 @@ Route::get('admin', [productsController::class, 'view'])->name('admin');
 Route::get('/delete/product/{productID}', [productsController::class, 'delete'])->name('delete.products');
 Route::get('/edit/product/{productID}', [productsController::class, 'edit'])->name('edit.products');
 Route::put('/update/product/{productID}', [productsController::class, 'update'])->name('update.products');
+Route::post('upload',[productsController::class, 'upload'])->name('upload');
+Route::view('upload', 'upload');

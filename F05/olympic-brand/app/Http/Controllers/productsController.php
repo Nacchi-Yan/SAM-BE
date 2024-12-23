@@ -7,6 +7,25 @@ use App\Models\productsModel;
 
 class productsController extends Controller
 {
+    public function upload(Request $req)
+    {
+        // Validate the request data as needed...
+        $products = new productsModel();
+        $products->name = $req->input('name');
+        $products->stock = $req->input('stock');
+        $products->description = $req->input('description');
+        $products->price = $req->input('price');
+        $products->category = $req->input('category');
+        $image= $req->file('file');
+        $products->img = base64_encode($image->get());
+
+
+        $products->save();
+
+
+        toast('Item Created','success');
+        return redirect()->route('admin');
+    }
     public function viewProducts(Request $request){
         $products= productsModel::showProducts($request);
 
@@ -45,13 +64,32 @@ class productsController extends Controller
             'stock' => 'required|numeric',
             'description' => 'required|string|max:255',
             'price' => 'required|numeric',
-
+            'category' => 'required|string|max:255',
+            'file' => 'nullable|image|max:51200',
         ]);
 
-        // Find the prod with the given ID
+        // Find the product with the given ID
         $products = productsModel::find($id);
 
-        $products->update($req->all());
+        if (!$products) {
+            return redirect()->route('admin')->with('error', 'Product not found');
+        }
+
+        // Update fields from the request
+        $products->name = $req->input('name');
+        $products->stock = $req->input('stock');
+        $products->description = $req->input('description');
+        $products->price = $req->input('price');
+        $products->category = $req->input('category');
+
+        // Handle image update if a new file is uploaded
+        if ($req->hasFile('file')) {
+            $image = $req->file('file');
+            $products->img = base64_encode(file_get_contents($image->getRealPath()));
+        }
+
+        // Save the updated product
+        $products->save();
 
         return redirect()->route('admin')->with('success', 'Item updated successfully');
     }

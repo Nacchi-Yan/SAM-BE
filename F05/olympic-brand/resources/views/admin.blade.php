@@ -25,6 +25,8 @@
                             <th>stock no</th>
                             <th>description</th>
                             <th>price</th>
+                            <th>category</th>
+                            <th>image</th>
                             <th>action</action>
 
                         </tr>
@@ -37,6 +39,10 @@
                         <td>{{ $products->stock}}</td>
                         <td>{{ $products->description}}</td>
                         <td>{{ $products->price}}</td>
+                        <td>{{ $products->category}}</td>
+
+                        <td><img src="data:image/png;base64,{{ $products->img}}"></td>
+
                         <td>
                             <a href="{{ route('edit.products', ['productID' => $products->productID]) }}"  class='btn btn-sm mx-1 mb-1'>Edit</a>
                             <a href="{{ route('delete.products', ['productID' => $products->productID]) }}"  class='btn btn-sm mx-1 mb-1'

@@ -40,7 +40,7 @@ class ordersController extends Controller
     public function viewReceipt(Request $request){
         $controlNumber = session('controlNumber');
         $receipt = ordersModel::showReceipts($controlNumber);
-        // Session::forget('controlNumber');
+        Session::forget('controlNumber');
         return view('receipt', ['receipt' => $receipt]);
     }
 

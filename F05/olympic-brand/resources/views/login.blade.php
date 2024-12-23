@@ -9,20 +9,15 @@
   </head>
   <body>
     <h1>Login</h1>
-    <!-- Check if user is logged in -->
-    @if(session('id'))
-        <form action="" method="POST" class="form">
-            @csrf
-            <input type="Email" name="email" placeholder="email" required><br><br>
-            <input type="password" name="password" placeholder="password" required><br><br>
-            <button type="submit">login</button><br><br>
-        </form>
+    <form action="" method="POST" class="form">
+        @csrf
+        <input type="Email" name="email" placeholder="email" required><br><br>
+        <input type="password" name="password" placeholder="password" required><br><br>
+        <button type="submit">login</button><br><br>
+    </form>
 
-        <a href ="{{ route('signup') }}"><button> Register</button></a>
+    <a href ="{{ route('signup') }}"><button> Register</button></a>
 
-    @else
-        <script>window.location = "Index";</script>
-    @endif
 
 
 

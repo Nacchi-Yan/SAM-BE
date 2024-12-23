@@ -53,13 +53,12 @@ class usersController extends Controller
 
                 } else {
 
-                    echo"This is the admin Home";
 
-                    // $request->session()->regenerate();
-                    // $request->session()->put('role', $user->role);
+                    $request->session()->regenerate();
+                    $request->session()->put('id', $user->id);
 
-                    // toast('Login Successful','success');
-                    // return redirect()->route('adminHome');
+                    toast('Login Successful','success');
+                    return redirect()->route('admin');
 
                 }
             } else {

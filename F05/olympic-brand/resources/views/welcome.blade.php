@@ -11,6 +11,36 @@
     <h1>Products</h1>
      <!-- Check if user is logged in -->
      @if(session('id'))
+
+        @php
+        // Check if currentControlNumber is already in the session
+        $currentControlNumber = session('currentControlNumber');
+
+        // If not in session, initialize $controlNumber
+        $controlNumber = '';
+
+        // If $currentControlNumber is not available, check for controlNumber in the session
+        if (!$currentControlNumber) {
+            $controlNumber = session('controlNumber'); // Reuse existing control number if available
+
+            // If controlNumber is not available, generate a new one
+            if (!$controlNumber) {
+                // Assuming $generateID is an incremental number obtained from somewhere
+                $generateID = rand(1, 9999);
+                $incrementalNumber = str_pad($generateID, 6, '0', STR_PAD_LEFT); //make sure the digits are 6 numbers
+                $controlNumber = now()->format('Y') . sprintf('%02d', now()->isoWeek()) . $incrementalNumber;
+
+                // Store controlNumber in the session
+                session(['controlNumber' => $controlNumber]);
+            }
+        }
+
+
+        @endphp
+
+        @if (session('currentControlNumber'))
+        <p>Control Number: {{ session('currentControlNumber') }}</p>
+        @endif
         <div class="container">
             <div class="row">
                 @foreach($products as $prod)
